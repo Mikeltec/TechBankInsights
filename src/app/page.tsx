@@ -44,7 +44,10 @@ export default async function DashboardPage({
   };
 }) {
   const period = searchParams?.period || "all-time";
-  const data = await getPortfolioData(period);
+  const from = searchParams?.from;
+  const to = searchParams?.to;
+  
+  const data = await getPortfolioData({ period, from, to });
 
   return (
     <SidebarProvider>
