@@ -22,19 +22,18 @@ export default function DateRangeFilter({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const getInitialDate = (): DateRange | undefined => {
+  const [date, setDate] = React.useState<DateRange | undefined>();
+
+  React.useEffect(() => {
     const from = searchParams.get("from");
     const to = searchParams.get("to");
     if (from && to) {
-      return { from: new Date(from), to: new Date(to) };
+      setDate({ from: new Date(from), to: new Date(to) });
+    } else {
+      setDate(undefined);
     }
-    return undefined;
-  };
-
-  const [date, setDate] = React.useState<DateRange | undefined>(
-    getInitialDate()
-  );
-
+  }, [searchParams]);
+  
   const handleDateSelect = (selectedDate: DateRange | undefined) => {
     setDate(selectedDate);
     const params = new URLSearchParams(searchParams);
