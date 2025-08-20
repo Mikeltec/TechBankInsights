@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Apex Insights',
+  title: 'Tech Bank Insights',
   description: 'AI-powered financial portfolio analysis',
 };
 

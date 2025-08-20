@@ -2,13 +2,12 @@ import {
   DollarSign,
   LayoutDashboard,
   LineChart,
-  PieChart,
   Settings,
   TrendingDown,
   TrendingUp,
-  User,
   Wallet,
 } from "lucide-react";
+import type { Metadata } from "next";
 
 import {
   SidebarProvider,
@@ -30,11 +29,18 @@ import DateRangeFilter from "@/components/dashboard/date-range-filter";
 import AiSummary from "@/components/dashboard/ai-summary";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+export const metadata: Metadata = {
+  title: 'Tech Bank Insights',
+  description: 'AI-powered financial portfolio analysis',
+};
+
 export default async function DashboardPage({
   searchParams,
 }: {
   searchParams?: {
     period?: Period;
+    from?: string;
+    to?: string;
   };
 }) {
   const period = searchParams?.period || "all-time";
@@ -49,7 +55,7 @@ export default async function DashboardPage({
               <div className="bg-primary rounded-lg p-2 text-primary-foreground">
                 <LineChart className="h-6 w-6" />
               </div>
-              <h1 className="text-xl font-semibold">Apex Insights</h1>
+              <h1 className="text-xl font-semibold">Tech Bank Insights</h1>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -58,18 +64,6 @@ export default async function DashboardPage({
                 <SidebarMenuButton isActive>
                   <LayoutDashboard />
                   Dashboard
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <Wallet />
-                  Portfolios
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton>
-                  <PieChart />
-                  Analysis
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -112,7 +106,7 @@ export default async function DashboardPage({
                 <SidebarTrigger className="md:hidden" />
                 <h1 className="text-2xl font-bold">Dashboard</h1>
               </div>
-              <DateRangeFilter defaultPeriod={period} />
+              <DateRangeFilter />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
